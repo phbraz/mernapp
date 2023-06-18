@@ -9,7 +9,7 @@ import { UserIndex } from "./users/pages";
 
 function App() {
   return (
-    <div className="h-screen bg-zinc-900">
+    <div className="min-h-screen bg-zinc-900">
       <Router>
         <Routes>
           <Route path="/" element={<UserIndex />} />

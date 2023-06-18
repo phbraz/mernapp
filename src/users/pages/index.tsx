@@ -36,7 +36,7 @@ const UserIndex = () => {
   return (
     <>
       <NavBar UserName={currentUser.UserName} />
-      <UserList items={usersList} />;
+      <UserList items={usersList} />
     </>
   );
 };

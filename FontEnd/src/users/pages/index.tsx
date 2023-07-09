@@ -4,11 +4,9 @@ import { UserFields } from "../../interfaces/UserFields";
 import { NavBar } from "../../shared/components/NavBar";
 import { GetUsersList } from "../../api/Calls";
 
-const UserIndex = () => {
+const UserIndex = async () => {
  
- const test = GetUsersList();
- 
- console.log(test)
+ const userData =  await GetUsersList();
   
   const currentUser: UserFields = {
     UserName: "paulobraz",
@@ -17,32 +15,11 @@ const UserIndex = () => {
     FirstName: "Paulo",
     LastName: "Braz",
   };
-  
-  const usersList = [
-    {
-      Id: 1,
-      PlaceCount: 2,
-      Image: "someImageStringHere",
-      Name: "PauloBraz",
-    },
-    {
-      Id: 2,
-      PlaceCount: 3,
-      Image: "someImageStringHere",
-      Name: "PatrycjaBraz",
-    },
-    {
-      Id: 3,
-      PlaceCount: 4,
-      Image: "someImageStringHere",
-      Name: "EmilyBraz",
-    },
-  ];
-  
+
   return (
       <>
-        <NavBar UserName={currentUser.UserName}/>
-        <UserList items={usersList}/>
+        <NavBar UserName={currentUser.UserName} />
+        <UserList items={userData} />
       </>
   );
 };

@@ -4,16 +4,16 @@ import { ColumnDef } from "@tanstack/react-table";
 import { TableContent } from "../../shared/components/TableContent";
 
 type UserListColumns = {
-  Id: number;
-  Name: string;
+  _id: string;
+  UserName: string;
   PlaceCount: number | number[];
 };
 
-const UserList = (props: UserListInterface) => {
+const UserList = (props: any) => {
   const { items } = props; //data
   const columns: ColumnDef<UserListColumns>[] = [
-    { accessorKey: "Id", header: "Id" },
-    { accessorKey: "Name", header: "Name" },
+    { accessorKey: "_id", header: "Id" },
+    { accessorKey: "UserName", header: "Name" },
     { accessorKey: "PlaceCount", header: "PlaceCount" },
   ];
 

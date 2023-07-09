@@ -1,8 +1,11 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+const { Schema } = mongoose;
 
-const userListSchema = new mongoose.Schema({
-    UserName: { type: String, required: true },
+const userListSchema = new Schema({
+    UserName: {type: String, required: true},
     PlaceCount: Number
 });
 
-module.exports = mongoose.model('UserList', userListSchema);
+const UserList = mongoose.model('UserList', userListSchema);
+
+export { UserList }

@@ -21,11 +21,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "tw-watcher": "npx tailwindcss -i ./src/input.css -o ./src/index.css --watch"
+    "start": "../FontEnd/node_modules/.bin/react-scripts start",
+    "build": "../FontEnd/node_modules/.bin/react-scripts FontEnd/build",
+    "test": "../FontEnd/node_modules/.bin/react-scripts test",
+    "eject": "../FontEnd/node_modules/.bin/react-scripts eject",
+    "tw-watcher": "npx tailwindcss -i src/input.css -o ./src/index.css --watch"
   },
   "eslintConfig": {
     "extends": [

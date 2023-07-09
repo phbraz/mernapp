@@ -13,6 +13,6 @@
     "nodemon": "^3.0.0"
   },
   "scripts": {
-    "start-BE": "nodemon server.js"
+    "start-BE": "nodemon app.js"
   }
 }

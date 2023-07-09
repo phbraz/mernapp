@@ -4,9 +4,9 @@ import { UserFields } from "../../interfaces/UserFields";
 import { NavBar } from "../../shared/components/NavBar";
 import { GetUsersList } from "../../api/Calls";
 
-const UserIndex = async () => {
+const UserIndex = () => {
  
- const userData =  await GetUsersList();
+ const userData =  GetUsersList();
   
   const currentUser: UserFields = {
     UserName: "paulobraz",

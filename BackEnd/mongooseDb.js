@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { UserList } from "./models/userlist.js";
 
-mongoose.connect('mongodb+srv://devAccess:hYek6STLeeNtXpI1@mernapp.5svekii.mongodb.net/DbSample?retryWrites=true&w=majority'); //you can find this on Atlas.
+mongoose.connect(); //you can find this on Atlas.
 
 const addNewUserToList = async (req, res, next) => {
     const addUser = new UserList({

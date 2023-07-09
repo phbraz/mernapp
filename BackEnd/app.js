@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { addNewUserToList, getUsersList } from "./mongooseDb.js";
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -13,13 +14,14 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res, next) => {
-    console.log('It works!');
-    res.json('It works');
-    next();
-})
-
 app.post('/userlist', addNewUserToList);
 app.get('/userlist', getUsersList);
 
-app.listen(5000);
+mongoose
+    .connect('mongodb+srv://devAccess:hYek6STLeeNtXpI1@mernapp.5svekii.mongodb.net/DbSample?retryWrites=true&w=majority')
+    .then(() => {
+        app.listen(5000);
+    })
+    .catch(err => {
+        console.log(err)
+    });

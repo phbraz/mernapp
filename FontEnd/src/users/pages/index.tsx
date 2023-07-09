@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { UserList } from "../components/UserList";
 import { UserFields } from "../../interfaces/UserFields";
 import { NavBar } from "../../shared/components/NavBar";
+import { GetUsersList } from "../../api/Calls";
 
 const UserIndex = () => {
+ 
+ const test = GetUsersList();
+ 
+ console.log(test)
+  
   const currentUser: UserFields = {
     UserName: "paulobraz",
     Id: 1,
@@ -11,7 +17,7 @@ const UserIndex = () => {
     FirstName: "Paulo",
     LastName: "Braz",
   };
-
+  
   const usersList = [
     {
       Id: 1,
@@ -32,12 +38,12 @@ const UserIndex = () => {
       Name: "EmilyBraz",
     },
   ];
-
+  
   return (
-    <>
-      <NavBar UserName={currentUser.UserName} />
-      <UserList items={usersList} />
-    </>
+      <>
+        <NavBar UserName={currentUser.UserName}/>
+        <UserList items={usersList}/>
+      </>
   );
 };
 

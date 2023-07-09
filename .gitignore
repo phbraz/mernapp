@@ -24,3 +24,4 @@ yarn-error.log*
 .idea
 FontEnd/src/index.css
 FontEnd/node_modules
+BackEnd/node_modules

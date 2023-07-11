@@ -1,24 +1,25 @@
 import React from "react";
 import { UserList } from "../components/UserList";
-import { UserFields } from "../../interfaces/UserFields";
-import { NavBar } from "../../shared/components/NavBar";
+import { useQuery } from "react-query";
+import { getUsersList } from "../../api/Calls";
 
 const UserIndex = () => {
 
-    const currentUser: UserFields = {
-        UserName: "paulobraz",
-        Id: 1,
-        Email: "paulo.braz@hotmail.com",
-        FirstName: "Paulo",
-        LastName: "Braz",
-    };
+    const query = useQuery('userData', getUsersList);
+    const {isLoading, data} = query;
 
-    return (
-        <>
-            <NavBar UserName={currentUser.UserName} />
-            <UserList items={[]} />
-        </>
-    );
+    //add a loading spinner here and increase the seconds.
+
+    if (isLoading) {
+        return <h1 className="text-white">loading...</h1>
+    }
+    else {
+        return (
+            <>
+                <UserList items={data} />
+            </>
+        );
+    }
 };
 
 export { UserIndex };

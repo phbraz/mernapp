@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {UserListNew} from "../interfaces/UserListNew";
 
-const url = "http://localhost:5000";
+const url = "http://localhost:5000/api";
 
 export function GetUsersList()  {
     const [usersList, setUsersList] = useState<UserListNew[]>([]);
@@ -13,6 +13,6 @@ export function GetUsersList()  {
             setUsersList(data)
         })
     }, []);
-    
+
     return usersList;
 }

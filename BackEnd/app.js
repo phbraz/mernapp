@@ -5,9 +5,6 @@ import { router as usersRoutes } from "./routes/users-routes.js";
 
 const app = express();
 
-//declare your routes here
-app.use(usersRoutes);
-
 app.use(bodyParser.json());
 
 //this fix cors errors.
@@ -17,6 +14,9 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
     next();
 });
+
+//declare your routes here
+app.use('/api',usersRoutes);
 
 
 

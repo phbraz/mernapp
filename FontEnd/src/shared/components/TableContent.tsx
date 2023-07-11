@@ -2,8 +2,6 @@ import React from "react";
 import {
   useReactTable,
   getCoreRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
   ColumnDef,
   flexRender,
 } from "@tanstack/react-table";
@@ -21,7 +19,6 @@ const TableContent = <TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    //getPaginationRowModel: getPaginationRowModel() this is for pagination
   });
 
   return (

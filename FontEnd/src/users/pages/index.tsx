@@ -1,17 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { UserList } from "../components/UserList";
 import { useQuery } from "react-query";
 import { getUsersList } from "../../api/Calls";
+import {Spinner} from "../../shared/components/Spinner";
 
 const UserIndex = () => {
+    const query = useQuery('userData', getUsersList, );
+    const {isLoading, data, } = query;
+    const [showSpinner, setShowSpinner] = useState(true);
 
-    const query = useQuery('userData', getUsersList);
-    const {isLoading, data} = query;
+    useEffect(() => {
+        const delay = 2000;
 
-    //add a loading spinner here and increase the seconds.
+        const timerId = setTimeout(() => {
+            setShowSpinner(false);
+        }, delay);
 
-    if (isLoading) {
-        return <h1 className="text-white">loading...</h1>
+        return () => clearTimeout(timerId); // Clear the timer on component unmount
+    }, []);
+
+    if (isLoading || showSpinner) {
+        return <>
+            <div className="flex flex-col items-center justify-center pt-4">
+                <Spinner colour="green" />
+            </div>
+        </>
     }
     else {
         return (

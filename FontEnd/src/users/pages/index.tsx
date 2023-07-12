@@ -1,27 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import { UserList } from "../components/UserList";
-import { UserFields } from "../../interfaces/UserFields";
-import { NavBar } from "../../shared/components/NavBar";
-import { GetUsersList } from "../../api/Calls";
+import { useQuery } from "react-query";
+import { getUsersList } from "../../api/Calls";
+import {Spinner} from "../../shared/components/Spinner";
 
 const UserIndex = () => {
- 
- const userData =  GetUsersList();
-  
-  const currentUser: UserFields = {
-    UserName: "paulobraz",
-    Id: 1,
-    Email: "paulo.braz@hotmail.com",
-    FirstName: "Paulo",
-    LastName: "Braz",
-  };
+    const query = useQuery('userData', getUsersList, );
+    const {isLoading, data, } = query;
+    const [showSpinner, setShowSpinner] = useState(true);
 
-  return (
-      <>
-        <NavBar UserName={currentUser.UserName} />
-        <UserList items={userData} />
-      </>
-  );
+    useEffect(() => {
+        const delay = 2000;
+
+        const timerId = setTimeout(() => {
+            setShowSpinner(false);
+        }, delay);
+
+        return () => clearTimeout(timerId); // Clear the timer on component unmount
+    }, []);
+
+    if (isLoading || showSpinner) {
+        return <>
+            <div className="flex flex-col items-center justify-center pt-4">
+                <Spinner colour="green" />
+            </div>
+        </>
+    }
+    else {
+        return (
+            <>
+                <UserList items={data} />
+            </>
+        );
+    }
 };
 
 export { UserIndex };

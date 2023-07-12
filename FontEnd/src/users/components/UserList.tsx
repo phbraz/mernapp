@@ -1,5 +1,4 @@
 import React from "react";
-import { UserListInterface } from "../../interfaces/UserListInterface";
 import { ColumnDef } from "@tanstack/react-table";
 import { TableContent } from "../../shared/components/TableContent";
 
@@ -10,7 +9,8 @@ type UserListColumns = {
 };
 
 const UserList = (props: any) => {
-  const { items } = props; //data
+  const { items } = props;
+
   const columns: ColumnDef<UserListColumns>[] = [
     { accessorKey: "_id", header: "Id" },
     { accessorKey: "UserName", header: "Name" },

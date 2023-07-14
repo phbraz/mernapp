@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { UserList } from "../components/UserList";
 import { useQuery } from "react-query";
 import { getUsersList } from "../../api/Calls";
-import {Spinner} from "../../shared/components/Spinner";
+import { Spinner } from "../../shared/components/Spinner";
 
 const UserIndex = () => {
     const query = useQuery('userData', getUsersList, );

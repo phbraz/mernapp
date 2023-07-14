@@ -20,7 +20,7 @@ const getUsersList = async (req, res, next) => {
 }
 
 const createUserLogin = (req, res, next) => {
-    const { firstname, lastname, email, username, password  } = req.body;
+    const { firstname, lastname, email, username, password, datecreated  } = req.body;
 
     //check for existing users
     User.findOne({ email })
@@ -30,7 +30,7 @@ const createUserLogin = (req, res, next) => {
             }
 
             //create new user obj from our schema
-            const newUser = new User({ firstname, lastname, email, username, password });
+            const newUser = new User({ firstname, lastname, email, username, password, datecreated  });
 
             //hash pass
             bcrypt.hash(newUser.password, 10)
@@ -43,6 +43,7 @@ const createUserLogin = (req, res, next) => {
                             res.status(201).json({message: 'User has been registered successfully'})
                         })
                         .catch(err => {
+                            console.log(err);
                             res.status(500).json({message: 'Failed to register user'})
                         });
                 });

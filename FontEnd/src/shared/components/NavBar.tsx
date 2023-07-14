@@ -8,7 +8,7 @@ const NavBar = ({ UserName }: UserFields) => {
         <a href="#" className="text-white hover:opacity-40">
           Home
         </a>
-        <a href="#" className="text-white hover:opacity-40">
+        <a href="userlist" className="text-white hover:opacity-40">
           List of Users
         </a>
         <div className="flex flex-row justify-end space-x-3 flex-grow pr-8">

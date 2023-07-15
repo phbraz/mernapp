@@ -5,7 +5,7 @@ import { getUsersList } from "../../api/Calls";
 import { Spinner } from "../../shared/components/Spinner";
 
 const UserIndex = () => {
-    const query = useQuery('userData', getUsersList, );
+    const query = useQuery('userData', getUsersList);
     const {isLoading, data, } = query;
     const [showSpinner, setShowSpinner] = useState(true);
 

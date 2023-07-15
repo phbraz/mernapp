@@ -11,10 +11,13 @@ interface props {
     fields: Field[],
     requestMethod: string,
     formName?: string
-    submitButtonName: string
+    submitButtonName: string,
+    submitHandler?: any
+    changeHandler?: any
 }
 
-const Form = ({ fields, requestMethod, formName, submitButtonName } : props) => {
+
+const Form = ({ fields, requestMethod, formName, submitButtonName, submitHandler, changeHandler } : props) => {
     
     return (
         <div className="flex flex-col items-center justify-center mt-56">
@@ -22,7 +25,7 @@ const Form = ({ fields, requestMethod, formName, submitButtonName } : props) => 
                 {formName}
             </div>
             <div className="flex flex-col w-3/12 rounded-b bg-zinc-800 shadow">
-                <form method={requestMethod}>
+                <form method={requestMethod} onChange={changeHandler} onSubmit={submitHandler}>
                     {fields.map((field) => (
                         <div className="flex flex-col text-white p-3">
                             <input

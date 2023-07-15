@@ -9,7 +9,7 @@ import { UserIndex } from "./users/pages";
 import {QueryClient, QueryClientProvider} from "react-query";
 import {NavBar} from "./shared/components/NavBar";
 import {UserFields} from "./interfaces/UserFields";
-import { Form } from "./shared/components/Form";
+import {Login} from "./users/pages/login";
 
 const queryClient = new QueryClient();
 
@@ -21,18 +21,6 @@ function App() {
     FirstName: "Paulo",
     LastName: "Braz",
   };
-  const formFields = [
-    {
-      name:"email",
-      type:"email",
-      required: true
-    },
-    {
-      name:"password",
-      type:"password",
-      required: true
-    }
-  ]
   
   return (
     <div className="min-h-screen bg-zinc-900">
@@ -40,7 +28,7 @@ function App() {
         <NavBar UserName={currentUser.UserName} />
         <Router>
           <Routes>
-            <Route path="/" element={<Form fields={formFields} requestMethod="POST" formName="Login" submitButtonName="Submit" />} />
+            <Route path="/" element={<Login  />} />
             <Route path="*" element={<Navigate to="/" />} />
             <Route path="/userlist" element={<UserIndex />} />
             

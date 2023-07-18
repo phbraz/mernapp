@@ -1,31 +1,37 @@
-import React, {ChangeEvent, useState} from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { login as loginFields } from "../../shared/Utils/formsfields/login";
 import { Form } from "../../shared/components/Form";
 import { loginUser } from "../../api/Calls";
-import {useMutation} from "react-query";
+import { useMutation } from "react-query";
+import Cookies from "universal-cookie";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [token, setToken] = useState("");
-
+    const cookies = new Cookies();
+    const cookieExpireDate = new Date();
+    cookieExpireDate.setTime(cookieExpireDate.getTime() + (60 * 60 * 1000)); //one hour
+    
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.name === "email" ? setEmail(e.target.value) : setPassword(e.target.value);
     }
-
-    const loginMutation = useMutation(loginUser, {
-        onSuccess: (data) => {
-            setToken(data);
+    
+    const submitForm = async () => {
+        return await loginUser({email, password});
+    }
+    
+    const { mutate } = useMutation(submitForm, {
+        onSuccess: (response) => {
+            cookies.set("token", response, { expires: cookieExpireDate });
         }
     });
-
-    const loginHandler = async (e: any) => {
+    
+    const loginHandler = async  (e: FormEvent) => {
         e.preventDefault();
-        loginMutation.mutate({email, password});
+        await mutate();
+        window.location.reload();
     }
-
-
-
+    
     return <>
         <Form
             fields={loginFields}

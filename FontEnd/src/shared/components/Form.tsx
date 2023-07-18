@@ -27,7 +27,7 @@ const Form = ({ fields, requestMethod, formName, submitButtonName, submitHandler
             <div className="flex flex-col w-3/12 rounded-b bg-zinc-800 shadow">
                 <form method={requestMethod} onChange={changeHandler} onSubmit={submitHandler}>
                     {fields.map((field) => (
-                        <div className="flex flex-col text-white p-3">
+                        <div key={field.name} className="flex flex-col text-white p-3">
                             <input
                                 placeholder={field.name}
                                 name={field.name}

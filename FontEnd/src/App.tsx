@@ -9,6 +9,7 @@ import { UserIndex } from "./users/pages";
 import { NavBar } from "./shared/components/NavBar";
 import { Login } from "./users/pages/login";
 import Cookies from "universal-cookie";
+import {Register} from "./users/pages/register";
 
 function App() {
   const cookies = new Cookies();
@@ -21,6 +22,7 @@ function App() {
           <NavBar isUserAuthenticated={false}  />
           <Router>
             <Routes>
+              <Route path="/account/register" element={<Register />} />
               <Route path="/" element={<Login />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>

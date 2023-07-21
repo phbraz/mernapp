@@ -1,5 +1,6 @@
 import React from "react";
 import { UserFields } from "../../interfaces/UserFields";
+import Cookies from "universal-cookie";
 
 interface NavBarProps {
   isUserAuthenticated: boolean,
@@ -7,6 +8,15 @@ interface NavBarProps {
 }
 
 const NavBar = ({isUserAuthenticated, userFields}: NavBarProps) => {
+  const currentUrlPath = window.location.pathname;
+  const isRegisterPage = /\/account\/register$/.test(currentUrlPath);
+  const cookies = new Cookies();
+
+  const logOutUser = () => {
+    cookies.remove("token");
+    window.location.reload();
+  }
+
   return (
     <>
       {isUserAuthenticated ?
@@ -17,6 +27,7 @@ const NavBar = ({isUserAuthenticated, userFields}: NavBarProps) => {
                 </p>
                 <a href="userlist" className="text-white hover:opacity-40">List of Users</a>
                 <div className="flex flex-row justify-end space-x-3 flex-grow pr-8">
+                  <button className="text-white hover:opacity-40" onClick={logOutUser}>Logout</button>
                   <img
                       src="https://bestprofilepictures.com/wp-content/uploads/2020/07/Awesome-Profile-Picture-For-Facebook.jpg"
                       alt="Icon"
@@ -28,8 +39,10 @@ const NavBar = ({isUserAuthenticated, userFields}: NavBarProps) => {
         (
             <div className="flex flex-row py-4 pl-3 pb-4 space-x-6 bg-zinc-800 shadow">
               <p className="text-white hover:opacity-40">Home</p>
+              <div className="flex flex-row justify-end space-x-3 flex-grow pr-8">
+                <a href={isRegisterPage ? "/" : "account/register"} className="text-white hover:opacity-40">{isRegisterPage ? "Login" : "Register"}</a>
+              </div>
             </div>
-            
         )
       }
     </>

@@ -6,32 +6,43 @@ import {
   Navigate,
 } from "react-router-dom";
 import { UserIndex } from "./users/pages";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {NavBar} from "./shared/components/NavBar";
-import {UserFields} from "./interfaces/UserFields";
-
-const queryClient = new QueryClient();
+import { NavBar } from "./shared/components/NavBar";
+import { Login } from "./users/pages/login";
+import Cookies from "universal-cookie";
+import {Register} from "./users/pages/register";
 
 function App() {
-  const currentUser: UserFields = {
-    UserName: "paulobraz",
-    Id: 1,
-    Email: "paulo.braz@hotmail.com",
-    FirstName: "Paulo",
-    LastName: "Braz",
-  };
+  const cookies = new Cookies();
+  
+  const token = cookies.get("token");
+  
+  if (!token) {
+    return (
+        <div className="min-h-screen bg-zinc-900">
+          <NavBar isUserAuthenticated={false}  />
+          <Router>
+            <Routes>
+              <Route path="/account/register" element={<Register />} />
+              <Route path="/" element={<Login />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </Router>
+          
+        </div>
+    )
+  }
 
+  
   return (
     <div className="min-h-screen bg-zinc-900">
-      <QueryClientProvider client={queryClient}>
-        <NavBar UserName={currentUser.UserName} />
-        <Router>
-          <Routes>
-            <Route path="/" element={<UserIndex />} />
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
-        </Router>
-      </QueryClientProvider>
+      <NavBar isUserAuthenticated={true}  />
+      <Router>
+        <Routes>
+          <Route path="/" element={<h1 className="text-white">you are in</h1>} />
+          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="/userlist" element={<UserIndex />} />
+        </Routes>
+      </Router>
     </div>
   );
 }

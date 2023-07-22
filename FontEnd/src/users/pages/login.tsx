@@ -4,6 +4,7 @@ import { Form } from "../../shared/components/Form";
 import { loginUser } from "../../api/Calls";
 import { useMutation } from "react-query";
 import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -11,9 +12,14 @@ const Login = () => {
     const cookies = new Cookies();
     const cookieExpireDate = new Date();
     cookieExpireDate.setTime(cookieExpireDate.getTime() + (60 * 60 * 1000)); //one hour
+    const navigate = useNavigate();
     
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.name === "email" ? setEmail(e.target.value) : setPassword(e.target.value);
+    }
+
+    const registerButtonHandler = () => {
+        navigate("/account/register");
     }
     
     const submitForm = async () => {
@@ -40,6 +46,9 @@ const Login = () => {
             formName="Login"
             changeHandler={handleChange}
             submitHandler={loginHandler}
+            secondButtonName="Register"
+            secondButtonHandler={registerButtonHandler}
+            allowAutocomplete={false}
         />
     </>
 }

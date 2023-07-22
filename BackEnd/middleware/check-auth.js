@@ -8,7 +8,7 @@ const validateToken = (req, res, next) => {
         }
 
         const decodedToken = jwt.verify(token, 'secret-super-key');
-        req.userData = { userId: decodedToken.userId }
+        res.userData = { userId: decodedToken.userId }
         next();
 
     } catch (errorData) {

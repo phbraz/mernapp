@@ -40,7 +40,7 @@ const createUserLogin = (req, res, next) => {
                     //save to db
                     newUser.save()
                         .then(savedUser => {
-                            res.status(201).json({message: 'User has been registered successfully'})
+                            res.status(201).json({message: 'User has been registered successfully, please login'})
                         })
                         .catch(err => {
                             console.log(err);

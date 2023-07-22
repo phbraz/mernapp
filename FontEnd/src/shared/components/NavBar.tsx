@@ -8,8 +8,6 @@ interface NavBarProps {
 }
 
 const NavBar = ({isUserAuthenticated, userFields}: NavBarProps) => {
-  const currentUrlPath = window.location.pathname;
-  const isRegisterPage = /\/account\/register$/.test(currentUrlPath);
   const cookies = new Cookies();
 
   const logOutUser = () => {
@@ -39,9 +37,6 @@ const NavBar = ({isUserAuthenticated, userFields}: NavBarProps) => {
         (
             <div className="flex flex-row py-4 pl-3 pb-4 space-x-6 bg-zinc-800 shadow">
               <p className="text-white hover:opacity-40">Home</p>
-              <div className="flex flex-row justify-end space-x-3 flex-grow pr-8">
-                <a href={isRegisterPage ? "/" : "account/register"} className="text-white hover:opacity-40">{isRegisterPage ? "Login" : "Register"}</a>
-              </div>
             </div>
         )
       }

@@ -1,9 +1,10 @@
-import React, {ChangeEvent, FormEvent, useState} from "react";
+import React, {ChangeEvent, FormEvent, useRef, useState} from "react";
 import { register as registerFields } from "../../shared/Utils/formsfields/register";
 import { Form } from "../../shared/components/Form";
 import { useMutation } from "react-query";
 import { registerUser } from "../../api/Calls";
 import { useNavigate } from 'react-router-dom';
+import {Notification} from "../../shared/components/Notification";
 
 const Register = () => {
     const [firstname, setFirstName] = useState("");
@@ -11,8 +12,11 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [isError, setIsError] = useState(false);
+    const [responseMessage, setResponseMessage] = useState("");
     const datecreated = new Date();
     const navigate = useNavigate();
+    const formRef = useRef<HTMLFormElement>(null);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         switch (e.target.name) {
@@ -34,6 +38,10 @@ const Register = () => {
         }
     }
 
+    const loginHandler = () => {
+        navigate("/");
+    }
+
     const submitForm = async () => {
         return await registerUser({
             firstname,
@@ -47,21 +55,34 @@ const Register = () => {
 
     const { mutate } = useMutation(submitForm, {
         onSuccess: (response) => {
-            navigate("/");
+            setIsError(false);
+            setResponseMessage(response.message)
         },
         onError: (error: ErrorEvent) => {
+            setIsError(true);
             // @ts-ignore
-            alert(error.response.data.error)
+            setResponseMessage(error.response.data.error)
         }
     });
 
     const registerHandler = async (e: FormEvent) => {
         e.preventDefault();
         await mutate();
+
+        if (formRef.current) {
+            formRef.current.reset();
+        }
+    }
+
+    const closeNotification = () => {
+        setResponseMessage("");
     }
 
 
     return <>
+        {responseMessage !== "" && (
+            <Notification message={responseMessage} isError={isError} onClose={closeNotification} />
+        )}
         <Form
             fields={registerFields}
             formName="Register"
@@ -69,6 +90,9 @@ const Register = () => {
             submitButtonName="Register"
             changeHandler={handleChange}
             submitHandler={registerHandler}
+            secondButtonName="Login"
+            secondButtonHandler={loginHandler}
+            ref={formRef}
         />
     </>
 }

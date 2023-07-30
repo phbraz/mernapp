@@ -53,7 +53,7 @@ const Form =
                         </div>
                     ))}
                     <div className="flex flex-row justify-between p-3">
-                        <button className="rounded bg-amber-700 shadow py-3 w-20 text-white hover:opacity-40">{submitButtonName}</button>
+                        <button type="submit" className="rounded bg-amber-700 shadow py-3 w-20 text-white hover:opacity-40">{submitButtonName}</button>
                         {secondButtonName !== undefined && (
                             <button className="rounded bg-transparent shadow py-3 w-20 text-white hover:opacity-40" onClick={secondButtonHandler}>{secondButtonName}</button>
                         )}

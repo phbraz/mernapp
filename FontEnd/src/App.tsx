@@ -10,6 +10,8 @@ import { NavBar } from "./shared/components/NavBar";
 import { Login } from "./users/pages/login";
 import Cookies from "universal-cookie";
 import {Register} from "./users/pages/register";
+import { Widget } from "./shared/components/Widget";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 function App() {
   const cookies = new Cookies();
@@ -38,7 +40,7 @@ function App() {
       <NavBar isUserAuthenticated={true}  />
       <Router>
         <Routes>
-          <Route path="/" element={<h1 className="text-white">you are in</h1>} />
+          <Route path="/" element={<Widget FAIcon={solid("piggy-bank")} />} />
           <Route path="*" element={<Navigate to="/" />} />
           <Route path="/userlist" element={<UserIndex />} />
         </Routes>
